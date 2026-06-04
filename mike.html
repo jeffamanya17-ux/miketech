@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mike Tech | Modern Tech Consulting</title>
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: modern sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
+        }
+
+        /* Black & Gold palette */
+        :root {
+            --black: #0a0a0a;
+            --black-light: #111111;
+            --gold: #F5B042;
+            --gold-dark: #d88e1a;
+            --gold-glow: rgba(245, 176, 66, 0.2);
+            --gray: #2a2a2a;
+            --card-bg: #151515;
+        }
+
+        /* sleek scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(245, 176, 66, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-weight: 500;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* mobile friendly toggle (simple responsive) */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                gap: 1.2rem;
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* buttons & elements */
+        .btn-gold {
+            background: var(--gold);
+            color: #0a0a0a;
+            padding: 0.75rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        .btn-gold:hover {
+            background: var(--gold-dark);
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            padding: 0.7rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: black;
+        }
+
+        /* sections */
+        section {
+            padding: 5rem 5%;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            border-left: 5px solid var(--gold);
+            padding-left: 1rem;
+        }
+        .gold-text {
+            color: var(--gold);
+        }
+
+        /* cards grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 1.8rem;
+            transition: 0.2s ease;
+            border: 1px solid #2a2a2a;
+        }
+        .card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        .card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        /* forms */
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 8px 0;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 16px;
+            color: white;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .flex-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        /* live chat fixed */
+        .live-chat {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--gold);
+            color: black;
+            width: 55px;
+            height: 55px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 999;
+            transition: 0.2s;
+        }
+        .live-chat:hover {
+            background: var(--gold-dark);
+            transform: scale(1.05);
+        }
+
+        /* modal for chat + booking / login */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: var(--black-light);
+            max-width: 500px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid var(--gold);
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gold);
+        }
+
+        footer {
+            background: #060606;
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 12px;
+            color: #ccc;
+            transition: 0.2s;
+        }
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+
+        /* FAQ accordion */
+        .faq-item {
+            background: var(--card-bg);
+            margin-bottom: 1rem;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+        }
+        .faq-question {
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 0.7rem;
+            color: #bcbcbc;
+        }
+        /* gamification simple badge */
+        .badge {
+            background: var(--gold);
+            color: #000;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .case-study-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+        }
+        .profile-card {
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">MIKE <span>TECH</span></div>
+    <ul class="nav-links">
+        <li><a href="#" data-nav="home">Home</a></li>
+        <li><a href="#" data-nav="about">About</a></li>
+        <li><a href="#" data-nav="services">Services</a></li>
+        <li><a href="#" data-nav="blog">Blog</a></li>
+        <li><a href="#" data-nav="contact">Contact</a></li>
+    </ul>
+    <div>
+        <button id="loginBtnModal" class="btn-outline" style="margin-right: 8px;"><i class="fas fa-user"></i> Login</button>
+        <button id="signupBtnModal" class="btn-gold">Sign Up</button>
+    </div>
+</nav>
+
+<!-- Main sections: Home, About, Services, Blog, Contact - dynamic show/hide -->
+<main id="main-content">
+    <!-- HOME section -->
+    <section id="home-section" class="section">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <span class="badge"><i class="fas fa-rocket"></i> Future-ready</span>
+                <h1 style="font-size: 3rem; margin-top: 1rem;">Innovate with <span class="gold-text">Mike Tech</span></h1>
+                <p style="font-size: 1.2rem; margin: 1.5rem 0;">IT consulting · System integration · Software development — friendly, modern, and built for the next generation of tech pioneers.</p>
+                <div class="flex-btns" style="justify-content: center;">
+                    <button class="btn-gold" id="bookingQuickBtn">Book a consultation ?</button>
+                    <button class="btn-outline" id="exploreServicesBtn">Explore services</button>
+                </div>
+            </div>
+            <!-- Case Studies showcase -->
+            <div style="margin-top: 4rem;">
+                <h2>?? Case Studies</h2>
+                <div class="cards-grid">
+                    <div class="card"><i class="fas fa-cloud-upload-alt"></i><h3>AI-driven analytics</h3><p>Startup x2 growth with our predictive models. +45% efficiency.</p><a href="#" style="color:var(--gold);">Read more ?</a></div>
+                    <div class="card"><i class="fas fa-microchip"></i><h3>System integration</h3><p>Legacy to cloud transformation for fintech leader.</p><a href="#" style="color:var(--gold);">Read more ?</a></div>
+                    <div class="card"><i class="fas fa-gamepad"></i><h3>Gaming backend</h3><p>Scalable architecture for 500k+ concurrent users.</p><a href="#" style="color:var(--gold);">Read more ?</a></div>
+                </div>
+            </div>
+            <!-- newsletter signup -->
+            <div style="margin-top: 3rem; background: #111; border-radius: 32px; padding: 2rem; text-align: center;">
+                <h3>?? Stay in the loop</h3>
+                <p>Get innovation insights, AI updates & exclusive invites.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem;">
+                    <input type="email" id="newsletterEmail" placeholder="Your email" style="max-width: 280px;">
+                    <button id="newsletterBtn" class="btn-gold">Subscribe</button>
+                </div>
+                <p id="newsletterMsg" style="font-size: 0.8rem; margin-top: 8px;"></p>
+            </div>
+            <!-- User reviews & FAQ snippets -->
+            <div style="margin-top: 2rem;">
+                <h2>? What our community says</h2>
+                <div class="cards-grid">
+                    <div class="card">"Mike Tech transformed our dev workflow. Gold standard support!" — Alex R.</div>
+                    <div class="card">"Their IT consulting helped us scale from zero to launch in weeks." — Jamie L.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT section -->
+    <section id="about-section" class="section" style="display: none;">
+        <div class="container">
+            <h2>About Mike Tech</h2>
+            <p style="font-size: 1.2rem; max-width: 800px;">We are a friendly & approachable technology consulting firm. Born from a passion for AI, gaming, and innovation — we empower startups and devs aged 18–25 to build the future. Black & gold mindset: sleek but human.</p>
+            <div class="cards-grid" style="margin-top: 2rem;">
+                <div class="card"><i class="fab fa-github"></i><h3>GitHub integration</h3><p>Open source culture & CI/CD workflows</p></div>
+                <div class="card"><i class="fab fa-stack-overflow"></i><h3>Stack Overflow</h3><p>Trusted solutions & dev knowledge</p></div>
+                <div class="card"><i class="fab fa-hacker-news"></i><h3>Hacker News</h3><p>Cutting edge tech discussions</p></div>
+            </div>
+            <div class="profile-card" style="margin-top: 2rem; background:#1e1e1e; border-radius: 28px; padding: 1.5rem;">
+                <h3><i class="fas fa-users"></i> Community & Gamification</h3>
+                <p>Earn "Innovator Badges" by completing interactive tutorials! <span class="badge">? Level up</span></p>
+                <button class="btn-outline" id="gamificationDemo">Claim free tutorial ?</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES section -->
+    <section id="services-section" class="section" style="display: none;">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="cards-grid">
+                <div class="card"><i class="fas fa-chalkboard-teacher"></i><h3>IT Consulting</h3><p>Strategic roadmaps, cloud advisory, digital transformation.</p></div>
+                <div class="card"><i class="fas fa-link"></i><h3>System Integration</h3><p>Seamless APIs, legacy modernization, ETL pipelines.</p></div>
+                <div class="card"><i class="fas fa-code"></i><h3>Software Development</h3><p>Custom web apps, AI agents, gaming backends & mobile.</p></div>
+            </div>
+            <div style="margin-top: 2rem; background:#111; border-radius: 24px; padding: 1.6rem;">
+                <h3>?? Booking system — reserve a slot</h3>
+                <div class="form-group"><input type="text" id="bookName" placeholder="Your name"></div>
+                <div class="form-group"><input type="email" id="bookEmail" placeholder="Email"></div>
+                <div class="form-group"><input type="date" id="bookDate"></div>
+                <button id="bookConsultBtn" class="btn-gold">Book now</button>
+                <p id="bookingFeedback"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOG section with advanced search & posts -->
+    <section id="blog-section" class="section" style="display: none;">
+        <div class="container">
+            <h2>?? Blog & Insights</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                <input type="text" id="blogSearchInput" placeholder="?? Advanced search (AI, startup, gaming...)" style="flex:1;">
+                <button id="searchBlogBtn" class="btn-outline">Search</button>
+            </div>
+            <div id="blogPostsList">
+                <!-- dynamic blog posts -->
+            </div>
+            <!-- user comments section -->
+            <div style="margin-top: 2rem;"><h3>Leave a review / comment</h3><textarea id="userComment" rows="2" placeholder="Share your thoughts..."></textarea><button id="postCommentBtn" class="btn-gold" style="margin-top: 0.5rem;">Post</button><div id="commentFeed"></div></div>
+        </div>
+    </section>
+
+    <!-- CONTACT section + contact forms, live chat integration, CRM hint -->
+    <section id="contact-section" class="section" style="display: none;">
+        <div class="container">
+            <h2>Get in touch</h2>
+            <div class="cards-grid">
+                <div class="card"><i class="fas fa-envelope"></i><h3>Contact form</h3>
+                    <input type="text" id="contactName" placeholder="Name"><input type="email" id="contactEmail2" placeholder="Email"><textarea rows="3" id="contactMsg" placeholder="Message..."></textarea>
+                    <button id="sendContactBtn" class="btn-gold">Send message ?</button>
+                    <p id="contactFormFeedback"></p>
+                </div>
+                <div class="card"><i class="fas fa-headset"></i><h3>24/7 Chat support</h3><p>Click the gold chat bubble ? talk to our team or AI assistant.</p><button id="openChatModalBtn" class="btn-outline">Start Live Chat</button></div>
+                <div class="card"><i class="fas fa-user-plus"></i><h3>Profile Management & Subscription</h3><p>Register to manage your profile, view case studies and premium tutorials.</p></div>
+            </div>
+            <div style="margin-top: 1.5rem;"><i class="fab fa-twitter"></i> <i class="fab fa-linkedin"></i> <i class="fab fa-discord"></i> <span>Social media integrated: follow us for innovation!</span></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-stack-overflow"></i></a>
+        <a href="#"><i class="fab fa-hacker-news"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p style="margin-top: 1rem;">&copy; 2025 Mike Tech — Black & Gold innovation. All rights reserved.</p>
+</footer>
+
+<!-- Live chat bubble -->
+<div class="live-chat" id="liveChatIcon">
+    <i class="fas fa-comment-dots"></i>
+</div>
+
+<!-- Global Modal (used for chat, login, booking) -->
+<div id="globalModal" class="modal">
+    <div class="modal-content" id="modalContentDynamic">
+        <span class="close-modal">&times;</span>
+        <div id="modalInner"></div>
+    </div>
+</div>
+
+<script>
+    // Simple SPA navigation
+    const sections = {
+        home: document.getElementById('home-section'),
+        about: document.getElementById('about-section'),
+        services: document.getElementById('services-section'),
+        blog: document.getElementById('blog-section'),
+        contact: document.getElementById('contact-section')
+    };
+    function showSection(sectionId) {
+        Object.keys(sections).forEach(key => { sections[key].style.display = 'none'; });
+        sections[sectionId].style.display = 'block';
+        window.scrollTo(0,0);
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const navKey = link.getAttribute('data-nav');
+            if(navKey && sections[navKey]) showSection(navKey);
+        });
+    });
+    document.getElementById('exploreServicesBtn')?.addEventListener('click',()=>showSection('services'));
+    // default home
+    showSection('home');
+
+    // --- User Auth (basic registration / login) ---
+    let users = JSON.parse(localStorage.getItem('mikeTechUsers')) || [];
+    let currentUser = JSON.parse(localStorage.getItem('currentMikeUser')) || null;
+
+    function updateAuthUI() {
+        const loginBtn = document.getElementById('loginBtnModal');
+        const signupBtn = document.getElementById('signupBtnModal');
+        if(currentUser) {
+            loginBtn.innerText = `Hi, ${currentUser.name}`;
+            signupBtn.innerText = 'Profile';
+        } else {
+            loginBtn.innerText = 'Login';
+            signupBtn.innerText = 'Sign Up';
+        }
+    }
+    function openModal(title, contentHtml) {
+        const modal = document.getElementById('globalModal');
+        const modalInner = document.getElementById('modalInner');
+        modalInner.innerHTML = `<h3>${title}</h3>${contentHtml}`;
+        modal.style.display = 'flex';
+    }
+    document.getElementById('loginBtnModal')?.addEventListener('click',()=>{
+        if(currentUser) {
+            openModal('My Profile', `<p>Welcome ${currentUser.name} (${currentUser.email})</p><button id="logoutBtn" class="btn-outline">Logout</button><div><h4>Subscription: ${currentUser.plan || 'Free'}</h4><button id="upgradePlanBtn" class="btn-gold">Upgrade to Gold+</button></div>`);
+            setTimeout(()=>{ document.getElementById('logoutBtn')?.addEventListener('click',()=>{ localStorage.removeItem('currentMikeUser'); currentUser=null; updateAuthUI(); location.reload(); }); document.getElementById('upgradePlanBtn')?.addEventListener('click',()=>{ if(currentUser){currentUser.plan='Gold+'; localStorage.setItem('currentMikeUser',JSON.stringify(currentUser)); localStorage.setItem('mikeTechUsers',JSON.stringify(users.map(u=>u.email===currentUser.email?currentUser:u))); alert('Subscribed to Gold+ ??'); location.reload();} }); },100);
+        } else {
+            openModal('Login', `<input type="email" id="loginEmail" placeholder="Email"><input type="password" id="loginPass" placeholder="Password"><button id="doLogin" class="btn-gold" style="margin-top:10px">Login</button><p>New? <a href="#" id="switchSignup" style="color:gold">Create account</a></p>`);
+            setTimeout(()=>{
+                document.getElementById('doLogin')?.addEventListener('click',()=>{
+                    const email=document.getElementById('loginEmail').value; const pwd=document.getElementById('loginPass').value;
+                    const user=users.find(u=>u.email===email && u.password===pwd);
+                    if(user){ currentUser=user; localStorage.setItem('currentMikeUser',JSON.stringify(user)); updateAuthUI(); document.getElementById('globalModal').style.display='none'; alert(`Welcome back ${user.name}`); location.reload();}
+                    else alert('Invalid credentials');
+                });
+                document.getElementById('switchSignup')?.addEventListener('click',(e)=>{ e.preventDefault(); document.getElementById('signupBtnModal').click(); });
+            },50);
+        }
+    });
+    document.getElementById('signupBtnModal')?.addEventListener('click',()=>{
+        if(currentUser){ showSection('contact'); return; }
+        openModal('Sign Up', `<input id="signName" placeholder="Full name"><input id="signEmail" placeholder="Email"><input id="signPass" type="password" placeholder="Password"><button id="doSignup" class="btn-gold">Register</button>`);
+        setTimeout(()=>{
+            document.getElementById('doSignup')?.addEventListener('click',()=>{
+                const name=document.getElementById('signName').value; const email=document.getElementById('signEmail').value; const pass=document.getElementById('signPass').value;
+                if(users.find(u=>u.email===email)) alert('User exists');
+                else { const newUser={name, email, password:pass, plan:'Free', profile:{}}; users.push(newUser); localStorage.setItem('mikeTechUsers',JSON.stringify(users)); currentUser=newUser; localStorage.setItem('currentMikeUser',JSON.stringify(newUser)); updateAuthUI(); alert('Registered!'); document.getElementById('globalModal').style.display='none'; location.reload(); }
+            });
+        },50);
+    });
+    updateAuthUI();
+
+    // Newsletter & booking & contact logic
+    document.getElementById('newsletterBtn')?.addEventListener('click',()=>{ let em=document.getElementById('newsletterEmail').value; if(em) { document.getElementById('newsletterMsg').innerHTML='? Subscribed! (CRM sync)'; /* CRM mock */ } else alert('enter email');});
+    document.getElementById('bookConsultBtn')?.addEventListener('click',()=>{ let name=document.getElementById('bookName').value; let date=document.getElementById('bookDate').value; if(name&&date) document.getElementById('bookingFeedback').innerHTML=`? Booked for ${name} on ${date} (confirmation sent) - lead captured.`; else alert('fill details'); });
+    document.getElementById('sendContactBtn')?.addEventListener('click',()=>{ let msg=document.getElementById('contactMsg').value; if(msg) document.getElementById('contactFormFeedback').innerHTML='?? Message sent! Our CRM will reply soon.'; else alert('write a message'); });
+
+    // Blog posts & advanced search
+    const blogPosts = [{title:'Why AI matters for gaming', category:'AI,gaming'},{title:'Modern system integration patterns', category:'system,integration'},{title:'Startup dev stack 2025', category:'startup,dev'},{title:'Black & Gold UI trends', category:'design'}];
+    function renderBlog(filter=''){ let filtered=blogPosts.filter(p=>p.title.toLowerCase().includes(filter.toLowerCase())||p.category.toLowerCase().includes(filter.toLowerCase())); let html='<div class="cards-grid">'; filtered.forEach(p=>{ html+=`<div class="card"><h3>${p.title}</h3><p>${p.category}</p><a href="#" style="color:var(--gold)">Read more ?</a></div>`; }); html+='</div>'; document.getElementById('blogPostsList').innerHTML=html; }
+    renderBlog();
+    document.getElementById('searchBlogBtn')?.addEventListener('click',()=>{ let val=document.getElementById('blogSearchInput').value; renderBlog(val); });
+    // comments
+    let comments=JSON.parse(localStorage.getItem('blogComments'))||[];
+    function renderComments(){ let feed=document.getElementById('commentFeed'); if(feed) feed.innerHTML=comments.map(c=>`<div class="case-study-item">? ${c}</div>`).join('')||'<p>No reviews yet. Be first!</p>'; }
+    renderComments();
+    document.getElementById('postCommentBtn')?.addEventListener('click',()=>{ let txt=document.getElementById('userComment')?.value; if(txt){ comments.push(txt); localStorage.setItem('blogComments',JSON.stringify(comments)); renderComments(); document.getElementById('userComment').value=''; alert('Thanks for community engagement!'); } });
+
+    // Live chat modal
+    function openChat(){ openModal('?? Live Chat', `<div id="chatMessages" style="height:200px; overflow-y:auto; background:#1e1e1e; padding:1rem; border-radius:20px;"><p>?? Hi! Need help? Ask about IT consulting, integration or just say hi.</p></div><input id="chatInput" placeholder="Type your message..."><button id="sendChatMsg" class="btn-gold" style="margin-top:8px">Send</button>`); setTimeout(()=>{ document.getElementById('sendChatMsg')?.addEventListener('click',()=>{ let inp=document.getElementById('chatInput'); if(inp.value){ let chatDiv=document.getElementById('chatMessages'); chatDiv.innerHTML+=`<p><strong>You:</strong> ${inp.value}</p><p><em>MikeTech AI:</em> Thanks! We'll get back soon. ??</p>`; inp.value=''; } }); },100);}
+    document.getElementById('liveChatIcon')?.addEventListener('click',openChat);
+    document.getElementById('openChatModalBtn')?.addEventListener('click',openChat);
+    document.querySelectorAll('.close-modal').forEach(el=>el.addEventListener('click',()=>{ document.getElementById('globalModal').style.display='none'; }));
+    // booking quick
+    document.getElementById('bookingQuickBtn')?.addEventListener('click',()=>{ showSection('services'); document.getElementById('bookName')?.scrollIntoView({behavior:'smooth'}); });
+    // gamification demo
+    document.getElementById('gamificationDemo')?.addEventListener('click',()=>{ alert('?? Interactive tutorial unlocked! You earned "Explorer Badge" - check community page later.'); });
+    // FAQ accordion extras (simple demo on about page)
+    // User experience: fast loading, mobile friendly ready.
+</script>
+</body>
+</html>
